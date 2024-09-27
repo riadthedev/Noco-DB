@@ -13,7 +13,7 @@ app.post('/', async (req, res) => {
     const {Email, URL} = req.body.data.rows[0]; 
 
     // Construct the message to send to Discord
-    const discordMessage = `New  Store review requested for ${URL} from ${Email}`;
+    const discordMessage = `New Store review requested for ${URL} from ${Email}`;
 
     try {
         await axios.post(process.env.DISCORD_WEBHOOK_URL, { content: discordMessage });
