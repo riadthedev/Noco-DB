@@ -10,10 +10,10 @@ app.use(express.json());
 
 // Endpoint to receive POST requests from NocoDB
 app.post('/', async (req, res) => {
-    const {Email} = req.body.data.rows[0]; 
+    const {Email, URL} = req.body.data.rows[0]; 
 
     // Construct the message to send to Discord
-    const discordMessage = `New review requested for ${Email}`;
+    const discordMessage = `New  Store review requested for ${URL} from ${Email}`;
 
     try {
         await axios.post(process.env.DISCORD_WEBHOOK_URL, { content: discordMessage });
@@ -26,7 +26,7 @@ app.post('/', async (req, res) => {
 app.get('/health', async (req, res) => {
     try {
         // Perform a simple POST request to the Discord webhook
-        await axios.post('https://discord.com/api/webhooks/1289258497439039489/p9DKCm2zDbshHp3hoEGaG2OGo-9lDBvGCGJ3z-nOzZ9Do2-43ruTUY_LvyRlBujsAyYA', { content: 'Health check' });
+        await axios.post('https://discord.com/api/webhooks/1289258497439039489/p9DKCm2zDbshHp3hoEGaG2OGo-9lDBvGCGJ3z-nOzZ9Do2-43ruTUY_LvyRlBujsAyYA', { content: 'Health check - Healthy' });
         res.status(200).json({ status: 'OK', message: 'Server is healthy, Discord webhook is responsive' });
     } catch (error) {
         console.error('Health check failed:', error);
