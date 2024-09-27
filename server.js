@@ -10,7 +10,7 @@ app.use(express.json());
 
 // Endpoint to receive POST requests from NocoDB
 app.post('/', async (req, res) => {
-    const {Email} = req.body.data; 
+    const {Email} = req.body.data.rows[0]; 
 
     // Construct the message to send to Discord
     const discordMessage = `New review requested for ${Email}`;
